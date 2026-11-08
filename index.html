@@ -13,6 +13,11 @@
 </head>
 <body>
 
+<!-- Site alert banner: populated from alert.json by app.js. Stays empty/hidden
+     (and the rest of the site is unaffected) if alert.json is missing, unreachable,
+     or "active" is false. See alert.json and the README for how to edit it. -->
+<div id="site-alert" class="site-alert no-print" hidden></div>
+
 <!-- Quick-access emergency numbers, always visible -->
 <div class="emergency-strip">
   <div class="container">
@@ -31,7 +36,6 @@
       <h1>1-227 Attack Battalion</h1>
       <p class="motto">&ldquo;First Attack!&rdquo; &middot; Trust &middot; Grow &middot; Achieve</p>
       <p class="sub">Family Deployment Smart Guide</p>
-      <p class="unit-colors" title="1-227 AB unit colors: black over white, diagonal split"><span class="swatch" aria-hidden="true"></span> Unit colors: black &amp; white &middot; 1st Cav colors: black &amp; yellow</p>
     </div>
   </div>
 </header>

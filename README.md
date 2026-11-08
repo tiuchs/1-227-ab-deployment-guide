@@ -12,7 +12,7 @@ from GitHub's web editor.
 
 ## Editing content
 
-Everything lives in three files:
+Everything lives in a few files:
 
 - [`index.html`](index.html) — all page content. Each topic is a
   `<details class="accordion">…</details>` block. To add a new section,
@@ -21,10 +21,50 @@ Everything lives in three files:
   syntax required.
 - [`assets/css/styles.css`](assets/css/styles.css) — colors, spacing, and
   layout. Brand colors are defined once at the top as CSS variables
-  (`--brown`, `--gold`, `--cream`, etc.) pulled from the unit crest.
+  (`--black`, `--gold`, `--white`, etc.). Unit colors are black and white
+  (the 1-227 AB guidon); 1st Cavalry Division colors are black and yellow.
+  Brown appears only in the crest artwork itself, never as a site color.
 - [`assets/js/app.js`](assets/js/app.js) — small vanilla-JS helpers: expand
-  all / collapse all, the search box, checklist progress + autosave, and the
-  print buttons. You shouldn't need to touch this to update content.
+  all / collapse all, the search box, checklist progress + autosave, the
+  print buttons, and the alert banner (below). You shouldn't need to touch
+  this to update content.
+- [`alert.json`](alert.json) — the editable content for the alert banner
+  (see next section). This is the one file meant to be updated often.
+
+## Alert banner (pushing updates / vital info)
+
+The site can show a dismissible banner at the very top of the page — above
+the emergency numbers — for things like "Family Day moved to Saturday" or
+"Newsletter delayed a week." It's driven entirely by
+[`alert.json`](alert.json), so posting or changing it never requires
+touching `index.html`, the CSS, or the JS, and there's no backend or build
+step involved.
+
+```json
+{
+  "active": true,
+  "id": "2026-11-08-family-day",
+  "level": "warning",
+  "message": "Family Day has moved to Saturday, 14 Nov at Hood Stadium.",
+  "link": { "text": "Details on Facebook", "url": "https://www.facebook.com/..." }
+}
+```
+
+- **`active`** — `true` shows the banner, `false` (or deleting the file)
+  hides it. Set this to `false` when the notice is no longer relevant.
+- **`id`** — any short string you change whenever you update the message.
+  Visitors who dismissed an earlier notice (clicked the ✕) will see the new
+  one once the `id` changes; if you only edit `message` and leave `id` the
+  same, people who already dismissed it won't see it again.
+- **`level`** — `"info"` (gold), `"warning"` (bright gold/amber), or
+  `"urgent"` (red) — controls the banner color.
+- **`message`** — the plain-text notice.
+- **`link`** — optional; omit it or leave `"url": ""` for no link.
+
+To turn the banner off entirely, set `"active": false` — you don't need to
+delete anything. If `alert.json` is ever missing, unreachable, or has a
+typo in it, the banner simply doesn't show; it cannot break the rest of the
+site.
 
 ### Quick edits on GitHub.com (no local setup needed)
 

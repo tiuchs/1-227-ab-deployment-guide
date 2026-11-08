@@ -123,26 +123,42 @@ header.site-header {
   color: #d8d8d8;
 }
 
-/* Unit-colors guidon swatch: black over white, diagonal upper-right to lower-left */
-.unit-colors {
-  display: inline-flex;
+/* ---------- Site alert banner ---------- */
+/* Populated by app.js from alert.json. Hidden (and inert) unless that file
+   loads and sets active:true, so a bad or missing alert.json never affects
+   the rest of the page. */
+.site-alert {
+  padding: 0.65rem 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.site-alert[hidden] { display: none; }
+.site-alert .container {
+  display: flex;
   align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.55rem;
-  font-size: 0.72rem;
-  color: #c9c9c9;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  gap: 0.75rem;
 }
-.unit-colors .swatch {
-  width: 28px;
-  height: 20px;
-  border-radius: 3px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.4);
-  background: linear-gradient(135deg, #000 50%, #fff 50%);
+.site-alert .alert-icon { flex-shrink: 0; font-size: 1.05rem; }
+.site-alert .alert-message { flex: 1 1 auto; }
+.site-alert .alert-message a { color: inherit; text-decoration: underline; }
+.site-alert .alert-dismiss {
   flex-shrink: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.2rem 0.4rem;
+  color: inherit;
+  opacity: 0.7;
 }
+.site-alert .alert-dismiss:hover { opacity: 1; }
+
+.site-alert.level-info { background: #fff7dc; color: var(--black); }
+.site-alert.level-warning { background: var(--gold-bright); color: var(--black); }
+.site-alert.level-urgent { background: var(--danger); color: #fff; border-bottom-color: rgba(255,255,255,0.3); }
+.site-alert.level-urgent .alert-message a { color: #fff; }
 
 /* ---------- Toolbar ---------- */
 .toolbar {

@@ -171,4 +171,67 @@
   // ---- Footer year ----
   var yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ---- Site alert banner, driven by alert.json ----
+  // Anything wrong with alert.json (missing, unreachable, malformed, or just
+  // "active": false) simply leaves the banner hidden — it never breaks the
+  // rest of the page. See alert.json / README for the fields volunteers edit.
+  var alertBox = document.getElementById("site-alert");
+  if (alertBox && window.fetch) {
+    fetch("alert.json", { cache: "no-store" })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (!data || !data.active || !data.message) return;
+
+        var dismissKey = "attack-alert-dismissed";
+        var alertId = String(data.id || data.message);
+        try {
+          if (localStorage.getItem(dismissKey) === alertId) return;
+        } catch (e) { /* ignore — just show it */ }
+
+        var level = ["info", "warning", "urgent"].indexOf(data.level) !== -1 ? data.level : "info";
+        alertBox.className = "site-alert no-print level-" + level;
+
+        var icon = document.createElement("span");
+        icon.className = "alert-icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = level === "urgent" ? "⚠️" : "📢";
+
+        var message = document.createElement("span");
+        message.className = "alert-message";
+        message.textContent = data.message + " ";
+
+        if (data.link && data.link.url) {
+          var link = document.createElement("a");
+          link.href = data.link.url;
+          link.textContent = data.link.text || "Learn more";
+          if (/^https?:\/\//i.test(data.link.url)) {
+            link.target = "_blank";
+            link.rel = "noopener";
+          }
+          message.appendChild(link);
+        }
+
+        var dismiss = document.createElement("button");
+        dismiss.type = "button";
+        dismiss.className = "alert-dismiss";
+        dismiss.setAttribute("aria-label", "Dismiss this notice");
+        dismiss.textContent = "✕";
+        dismiss.addEventListener("click", function () {
+          alertBox.hidden = true;
+          try { localStorage.setItem(dismissKey, alertId); } catch (e) { /* ignore */ }
+        });
+
+        var row = document.createElement("div");
+        row.className = "container";
+        row.appendChild(icon);
+        row.appendChild(message);
+        row.appendChild(dismiss);
+
+        alertBox.innerHTML = "";
+        alertBox.appendChild(row);
+        alertBox.hidden = false;
+      })
+      .catch(function () { /* alert.json missing/unreachable — stay hidden */ });
+  }
 })();
