@@ -5,6 +5,18 @@
   var accordions = Array.prototype.slice.call(document.querySelectorAll("details.accordion"));
   var sectionHeadings = Array.prototype.slice.call(document.querySelectorAll(".section-heading"));
 
+  // ---- Open a linked accordion (e.g. #hsmc) on load and on in-page jumps ----
+  function openTargetFromHash() {
+    if (!location.hash) return;
+    var target = document.getElementById(location.hash.slice(1));
+    if (target && target.tagName === "DETAILS") {
+      target.open = true;
+      target.scrollIntoView({ block: "start" });
+    }
+  }
+  openTargetFromHash();
+  window.addEventListener("hashchange", openTargetFromHash);
+
   // Map each section heading to the accordions that follow it, up to the next heading.
   function headingGroups() {
     var groups = [];

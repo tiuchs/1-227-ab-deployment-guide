@@ -101,17 +101,25 @@ branch root:
 
 ## A note on the information in this guide
 
-This guide includes unit contact names and phone numbers, and blank
-fillable forms (Soldier Information, Family Leave Form) carried over from
-the original printed flipbook. Nothing typed into the on-page forms or the
-pre-deployment checklist is ever sent anywhere — it's saved only in each
-visitor's own browser (`localStorage`), purely as a convenience, and can be
-cleared with the "Reset checklist" button or by clearing site data.
+This guide includes unit contact names, and blank fillable forms (Soldier
+Information, Family Leave Form) carried over from the original printed
+flipbook. Nothing typed into the on-page forms or the pre-deployment
+checklist is ever sent anywhere — it's saved only in each visitor's own
+browser (`localStorage`), purely as a convenience, and can be cleared with
+the "Reset checklist" button or by clearing site data.
 
-Because this is published as a public website, treat any updates to names,
-phone numbers, or unit details the same way you'd treat the original
-printed guide — keep it accurate, and remove or update information about
-people who have left the unit.
+**Personal cell numbers for commanders and first sergeants are
+intentionally not published** on this public site — only names/titles and
+the institutional HSMC Staff Duty lines (24/7) are listed. Keep it that
+way when editing: add institutional numbers (Staff Duty lines, company
+phone lines) freely, but route anything tied to one person's personal cell
+through "contact via Rear Detachment / SFRG" instead of printing the
+number.
+
+Because this is published as a public website, treat any updates to names
+or unit details the same way you'd treat the original printed guide — keep
+it accurate, and remove or update information about people who have left
+the unit.
 
 This is an unofficial, volunteer-maintained reference. It does not replace
 official information from your company SFRG leadership or the battalion
