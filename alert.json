@@ -1,7 +1,7 @@
 {
-  "active": false,
+  "active": true,
   "id": "2026-11-08-example",
   "level": "info",
-  "message": "This is where a battalion-wide update or urgent notice will appear. Edit alert.json to change it.",
+  "message": "This is where a battalion-wide update or urgent notice will appear.",
   "link": { "text": "Learn more", "url": "" }
 }
